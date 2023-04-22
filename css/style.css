@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Pacifico&family=Sono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Montserrat:wght@500&family=Pacifico&family=Sono&display=swap');
 *{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Dosis', sans-serif;
     font-size: 25px;
 }
 a{
@@ -9,7 +9,7 @@ a{
 html, body {
     /* z-index: 0; */
     position: relative;  
-    background: linear-gradient(238.06deg, rgba(0, 0, 0, 0.2) 29.29%, rgba(0, 0, 0, 0) 55.35%), linear-gradient(249.16deg, rgba(44, 116, 179, 0.51) 30.16%, rgba(10, 38, 71, 0.64) 96.77%),#1E1E1E;
+    background: linear-gradient(107.52deg, #000F26 2.42%, #3F4775 34.32%, #675886 50.94%, #9A6F9C 74.81%, #F9B0A9 93.64%, #FFD6D2 103.93%);
     background-repeat: no-repeat;
     max-width: 100vw;
     height: 100%;
@@ -43,8 +43,8 @@ html, body {
 }
 .heading-button-a{
     margin: 0 20px;
-    font-size: 18px;
-    color: rgba(167, 189, 216, 0.73);
+    font-size: 25px;
+    color: rgb(255, 255, 255);
 }
 .main{
     flex: 1 1;
@@ -57,25 +57,25 @@ html, body {
 }
 .main-name{
     color:rgb(255, 255, 255);
-    font-size: 72px;
+    font-size: 82px;
     margin: 0px;
 }
 .main-caption{
     color: rgba(167, 189, 216, 0.73);
-    font-size: 22px;
+    font-size: 30px;
     margin-bottom: 30px;
 }
 .main-button {
     padding: 20px 20px 20px 20px;
     text-decoration: none;
     color:rgba(2, 3, 3, 0.73);
-    background-color: #A5D7E8;
+    background-color: #FFD6D2;
     border-radius: 10PX;
     transition: 0.2s;
     margin-top: 20px
 }
 .main-button:hover{
-    background-color: #6491a0
+    background-color: #cfb6b3;
 }
 .footer{
     box-sizing: border-box;
@@ -99,7 +99,13 @@ html, body {
     box-sizing: border-box;
     mix-blend-mode: luminosity;
     border: 1px solid #A78484;
-    box-shadow: 5px 5px 80px 20px rgba(120, 147, 156, 0.78);
+    box-shadow: 5px 5px 80px 20px rgba(255, 255, 255, 0.78);
     border-radius: 10px;
     border: none;
 }
+@media (min-width: 450px) and (max-width: 1120px){
+    .main-name{
+        font-size: 50px;
+    }
+}
+
