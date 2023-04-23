@@ -9,11 +9,71 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-nwvPbPGjkIThEYrJq3N6UxBX6Qb41ax82M0nJ1kVZuyK8Uqu7o+GKnzOWv7mWJX8AV1POVltmhcHuKv7l4eJ4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
     </head>
+
+    <script>
+        var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 80 ;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+    </script>
+
 <body>
     <div class="body-content">
         <div class="heading">
             <div class="heading-logo">
-                <img src="./logo-nobackground.svg" alt="">
+                <img src="./assets/logo-nobackground.svg" alt="">
             </div>
             <div> </div>
             <div class="heading-button">
@@ -26,12 +86,16 @@
         </div>
         <div class="main">
                 <h1 class="main-name">Tensoract</h1>
-                <h3 class="main-caption">Tech of otaku will save the world</h3>
+                <h3>
+                    <a href="" class="typewrite" data-period="2000" data-type='[ "We are stars.", "Want to be a legends.", "Change your mind about Nguyen Tu Quang."]'>
+                    <span class="wrap"></span>
+                    </a>
+                </h3>
                 <a class="main-button"href="#">john with us !!</a>
         </div>
         <div class="footer">
             <div class="footer-img">
-                <img src="./Need Code By PCbots.png" alt="">
+                <img src="./assets/Need Code By PCbots.png" alt="">
             </div>
         </div>
     </div>
