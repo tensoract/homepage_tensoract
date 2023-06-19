@@ -356,6 +356,7 @@ button {
     padding-top: 10px;
     text-transform: uppercase;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .services_taital::after {
@@ -395,6 +396,7 @@ button {
     font-size: 16px;
     color: #060606;
     margin-left: 0px;
+    margin-top: 0px;
 }
 .moremore_bt {
     width: 170px;
@@ -471,10 +473,11 @@ button {
 .box_main {
     width: 100%;
     float: left;
-    background-color: #b9dfff;
+    background-color: #d3ebff;
     /* border: px solid red;  */
     border-radius: 10px;
     padding: 30px 0px;
+    text-align: center;
 }
 .box_main_1{
     width: 100%;
@@ -482,8 +485,10 @@ button {
     /* background-color: #526D82; */
     border: px solid red;  
     border-radius: 10px;
-    margin: 10px;
-    padding: 30px ;
+    /* margin: 10px; */
+    margin-top:10px;
+    padding: 30px 0px;
+    align-items: center;
 }
 .icon_1 {
     width: 100%;
@@ -501,12 +506,14 @@ button {
     text-transform: uppercase;
 }
 .lorem_text{
-    width: 100%;
-    float: left;
-    font-size: 18px;
+    width: 77%;
+    font-size: 17px;
     color: #000000;
     text-align: center;
+    display: inline-block;
     margin-left: 0px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 .moremore_bt_1 {
     width: 170px;
@@ -995,4 +1002,9 @@ button {
   #headerPopup iframe{
     width:100%;
     margin:0 auto;
+  }
+  .information{
+    margin-top: 30px;
+    width: 100%;
+    float: left;
   }
