@@ -21,6 +21,7 @@
 @import url(./icomoon.css);
 @import url(./meanmenu.css);
 @import url(./slick.css);
+@import url(./font-awesome.min.css);
 @import url(./jquery.fancybox.min.css);
 @import url(./jquery-ui.css);
 @import url(./nice-select.css);
@@ -1005,3 +1006,31 @@ button {
     width: 100%;
     float: left;
   }
+  .feedback_title{
+    width: 100%;
+    float: left;
+    font-weight: 500;
+    font-size: 40px;
+  }
+  .feedback_box{
+    width:90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .feedback_bt {
+    width: 170px;
+    float: left;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.feedback_bt a {
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #6187a7;
+    text-align: center;
+    padding: 15px 20px 15px 20px;
+    border-radius: 40px;
+    font-weight: bold;
+}
