@@ -1,104 +1,822 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tensoract Homepage</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-nwvPbPGjkIThEYrJq3N6UxBX6Qb41ax82M0nJ1kVZuyK8Uqu7o+GKnzOWv7mWJX8AV1POVltmhcHuKv7l4eJ4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" type="image/x-icon" href="./assets/logo-nobackground-cropped.svg" sizes="40x40">
-    </head>
-    <script>
-        var TxtType = function(el, toRotate, period) {
-                this.toRotate = toRotate;
-                this.el = el;
-                this.loopNum = 0;
-                this.period = parseInt(period, 10) || 2000;
-                this.txt = '';
-                this.tick();
-                this.isDeleting = false;
-            };
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Language" content="vi">
+  <title>Tensoract</title>
+<link rel="icon" href="favicon.ico"><link href="style.css" rel="stylesheet"></head>
 
-            TxtType.prototype.tick = function() {
-                var i = this.loopNum % this.toRotate.length;
-                var fullTxt = this.toRotate[i];
+<body x-data="{ page: 'home', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
+  x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMode'));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+  :class="{'dark bg-black': darkMode === true}">
+  <!-- ===== Bg Lines Start ===== -->
+  <div class="fixed top-0 left-0 -z-10 flex h-full w-full items-center justify-around">
+  <span class="w-[1px] h-full bg-stroke dark:bg-strokedark flex animate-line1"></span>
+  <span class="w-[1px] h-full bg-stroke dark:bg-strokedark flex animate-line2"></span>
+  <span class="w-[1px] h-full bg-stroke dark:bg-strokedark flex animate-line3"></span>
+</div>
+  <!-- ===== Bg Lines End ===== -->
 
-                if (this.isDeleting) {
-                this.txt = fullTxt.substring(0, this.txt.length - 1);
-                } else {
-                this.txt = fullTxt.substring(0, this.txt.length + 1);
-                }
+  <!-- ===== Header Start ===== -->
+  <header
+  class="fixed left-0 top-0 w-full z-99999 py-7"
+  :class="{ 'bg-white dark:bg-black shadow !py-4 transition duration-100' : stickyMenu }"
+  @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false"
+>
+  <div class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0 lg:flex items-center justify-between relative">
+    <div class="w-full lg:w-1/4 flex items-center justify-between">
+      <a href="index.html">
+        <img class="dark:hidden" src="images/logo-light.svg" alt="Logo Light" />
+        <img class="hidden dark:block" src="images/logo-dark.svg" alt="Logo Dark" />
+      </a>
 
-                this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
-
-                var that = this;
-                var delta = 100 - Math.random() * 100;
-
-                if (this.isDeleting) { delta /= 4; }
-
-                if (!this.isDeleting && this.txt === fullTxt) {
-                delta = this.period;
-                this.isDeleting = true;
-                } else if (this.isDeleting && this.txt === '') {
-                this.isDeleting = false;
-                this.loopNum++;
-                delta = 500;
-                }
-
-                setTimeout(function() {
-                that.tick();
-                }, delta);
-    };
-
-    window.onload = function() {
-        var elements = document.getElementsByClassName('typewrite');
-        for (var i=0; i<elements.length; i++) {
-            var toRotate = elements[i].getAttribute('data-type');
-            var period = elements[i].getAttribute('data-period');
-            if (toRotate) {
-              new TxtType(elements[i], JSON.parse(toRotate), period);
-            }
-        }
-        
-        var css = document.createElement("style");
-        css.type = "text/css";
-        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-        document.body.appendChild(css);
-    };
-    </script>
-
-<body>
-    <div class="body-content">
-        <div class="heading">
-            <div class="heading-logo">
-                <img src="./assets/logo-nobackground.svg" alt="">
-            </div>
-            <div> </div>
-            <nav>
-                <div class="heading-button">
-                    <a class="heading-button-a" href="#">Project</a>
-                    <a class="heading-button-a" href="#">Member</a>
-                    <a class="heading-button-a" href="#">Contact</a>
-                    <a class="heading-button-a" href="#">About</a>
-                </div>
-            </nav>
-        </div>
-        <div class="main">
-                <h1 class="main-name">Tensoract</h1>
-                <h3>
-                    <a href="" class="typewrite" data-period="2000" data-type='[ "We are an AI startup company.", "We build AI applications.", "Provide AI to small and medium-sized businesses."]'>
-                    <span class="wrap"></span>
-                    </a>
-                </h3>
-                <a class="main-button"href="#">Join with us</a>
-        </div>
-        <div class="footer">
-            <div class="footer-img">
-                <img src="./assets/img.png" alt="Code preview">
-            </div>
-        </div>
+      <!-- Hamburger Toggle BTN -->
+      <button class="lg:hidden block" @click="navigationOpen = !navigationOpen">
+        <span class="block relative cursor-pointer w-5.5 h-5.5">
+          <span class="block absolute w-full h-full">
+            <span class="block relative top-0 left-0 bg-black dark:bg-white rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-[0]" :class="{ '!w-full delay-300': !navigationOpen }"></span>
+            <span class="block relative top-0 left-0 bg-black dark:bg-white rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-150" :class="{ '!w-full delay-400': !navigationOpen }"></span>
+            <span class="block relative top-0 left-0 bg-black dark:bg-white rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-200" :class="{ '!w-full delay-500': !navigationOpen }"></span>
+          </span>
+          <span class="block absolute w-full h-full rotate-45">
+            <span class="block bg-black dark:bg-white rounded-sm ease-in-out duration-200 delay-300 absolute left-2.5 top-0 w-0.5 h-full" :class="{ 'h-0 delay-[0]': !navigationOpen }"></span>
+            <span class="block bg-black dark:bg-white rounded-sm ease-in-out duration-200 delay-400 absolute left-0 top-2.5 w-full h-0.5" :class="{ 'h-0 dealy-200': !navigationOpen }"></span>
+          </span>
+        </span>
+      </button>
+      <!-- Hamburger Toggle BTN -->
     </div>
-    </body>
+
+    <div
+      class="w-full lg:w-3/4 h-0 lg:h-auto invisible lg:visible lg:flex items-center justify-between"
+      :class="{ '!visible bg-white dark:bg-blacksection shadow-solid-5 h-auto max-h-[400px] overflow-y-scroll rounded-md mt-4 p-7.5': navigationOpen }"
+    >
+      <nav>
+        <ul class="flex lg:items-center flex-col lg:flex-row gap-5 lg:gap-10">
+          <li><a href="index.html" class="hover:text-primary" :class="{ 'text-primary': page === 'home' }">Trang chủ</a></li>
+          <li><a href="index.html#features" class="hover:text-primary">Dự án</a></li>
+
+          <li><a href="index.html#contact" class="hover:text-primary">Liên hệ</a></li>
+          <li><a href="index.html#about" class="hover:text-primary">Về chúng tôi</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-6 mt-7 lg:mt-0">
+        <div class="mr-1.5 absolute lg:static top-1 right-17" :class="navigationOpen ? '!visible' : '!visible'">
+          <label class="block m-0 relative">
+            <input type="checkbox" :value="darkMode" @change="darkMode = !darkMode" class="cursor-pointer w-full h-full opacity-0 absolute top-0 z-50 m-0" />
+            <img class="dark:hidden" src="images/icon-sun.svg" alt="Sun" />
+            <img class="hidden dark:block" src="images/icon-moon.svg" alt="Moon" />
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- ===== Header End ===== -->
+
+  <script>
+    // set up text to print, each item in array is new line
+    var aText = new Array(
+      "There are only 10 types of people in the world:",
+      "Those who understand binary, and those who don't"
+    );
+    var iSpeed = 100; // time delay of print out
+    var iIndex = 0; // start printing array at this posision
+    var iArrLength = aText[0].length; // the length of the text array
+    var iScrollAt = 20; // start scrolling up at this many lines
+
+    var iTextPos = 0; // initialise text position
+    var sContents = ''; // initialise contents variable
+    var iRow; // initialise current row
+
+    function typewriter() {
+      sContents = ' ';
+      iRow = Math.max(0, iIndex - iScrollAt);
+      var destination = document.getElementById("typedtext");
+
+      while (iRow < iIndex) {
+        sContents += aText[iRow++] + '<br />';
+      }
+      destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
+      if (iTextPos++ == iArrLength) {
+        iTextPos = 0;
+        iIndex++;
+        if (iIndex != aText.length) {
+          iArrLength = aText[iIndex].length;
+          setTimeout("typewriter()", 500);
+        }
+      } else {
+        setTimeout("typewriter()", iSpeed);
+      }
+    }
+
+
+    typewriter();
+  </script>
+  <main>
+    <!-- ===== Hero Start ===== -->
+    <section class="pt-35 md:pt-40 xl:pt-46 pb-20 xl:pb-25 overflow-hidden">
+      <div class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0">
+        <div class="flex lg:items-center lg:gap-8 xl:gap-32.5">
+          <div class="animate_left md:w-1/2 ">
+            <h4 class="text-black dark:text-white text-lg font-medium mb-4.5  ">🔥 Sản phẩm của chúng tôi sẽ phát hành
+              vào tháng 10 này</h4>
+            <h1 class="text-black dark:text-white text-3xl xl:text-hero font-bold mb-5  ">
+              Tensoract là công ty khởi nghiệp
+              <span
+                class="inline-block relative before:absolute before:bottom-2.5 before:left-0 before:w-full before:h-3 before:bg-titlebg dark:before:bg-titlebgdark before:-z-1">
+                công nghệ</span>
+            </h1>
+            <p>Chúng tôi phát triển những giải pháp ứng dụng Trí tuệ nhân tạo trong thương mại điện tử, dịch vụ cung ứng hàng hoá và
+              tự động hoá quy trình trong doanh nghiệp.</p>
+            <div class="mt-10">
+              <form action="https://app.formbold.com/s/oaE4v" method="POST">
+                <div class="flex flex-wrap gap-5">
+                  <input type="email" name="text_input_4768F148-66E7-4BCF-A8CA-1C6C74E7E4E5"
+                    placeholder="Nhập email của bạn" value="" required=""
+                    class="dark:bg-black border border-stroke dark:border-strokedark shadow-solid-2 dark:shadow-none rounded-full focus:outline-none focus:border-primary dark:focus:border-primary py-2.5 px-6" />
+                  <button
+                    class="flex bg-black hover:bg-blackho dark:bg-btndark text-white rounded-full ease-in-out duration-300 px-7.5 py-2.5">Nhận
+                    thông tin</button>
+                </div>
+              </form>
+
+              <!--   <p class="text-black dark:text-white mt-5">Try for free no credit card required.</p> -->
+            </div>
+          </div>
+          <div class="animate_right md:w-1/2 hidden lg:block ">
+            <div class="relative 2xl:-mr-7.5">
+              <img src="images/shape-01.png" alt="shape" class="absolute -left-11.5 top-0" />
+              <img src="images/shape-02.svg" alt="shape" class="absolute right-0 bottom-0" />
+              <img src="images/shape-03.svg" alt="shape" class="absolute -right-6.5 bottom-0" />
+              <div>
+                <img class="dark:hidden shadow-solid-l" src="images/hero-light.svg" alt="Hero" />
+                <img class="hidden dark:block shadow-solid-l" src="images/hero-dark.svg" alt="Hero" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Hero End ===== -->
+
+    <!-- ===== Clients Start ===== -->
+    <section class="bg-alabaster dark:bg-black border border-x-0 border-y-stroke dark:border-y-strokedark  ">
+      <div class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0 center">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-7.5 lg:gap-12.5 xl:gap-29 justify-center items-center h-40">
+          <a class="hidden md:block animate_top ">
+
+          </a>
+
+   
+          <a href="#" class="animate_top block">
+            <img class="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden"
+              src="images/brand14.svg" alt="Clients" />
+            <img class="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block"
+              src="images/brand14.svg" alt="Clients" />
+          </a>
+          <a href="#" class="animate_top block">
+            <img class="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden"
+              src="images/brand15.svg" alt="Clients" />
+            <img class="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block"
+              src="images/brand15.svg" alt="Clients" />
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Clients End ===== -->
+
+    <!-- ===== Features Start ===== -->
+    <section  class="py-20 lg:py-25 xl:py-30">
+      <div class="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0">
+        <!-- Section Title Start -->
+        <div class="animate_top text-center mx-auto"
+          x-data="{ sectionTitle: `VỀ CHÚNG TÔI`, sectionSubtitle: `ĐAM MÊ VÀ KHÁT VỌNG`, sectionTitlePara: `Tensoract là kết quả của đam mê và khát vọng của các thành viên trẻ tràn đầy năng lượng, hướng đến mục tiêu xây dựng một công ty công nghệ mang lại sản phẩm chất lượng cho người dùng.`}">
+          <div class="bg-zumthor dark:bg-blacksection dark:border dark:border-strokedark inline-block rounded-full py-1.5 px-4.5 mb-4">
+  <h4 x-text="sectionTitle" class="font-medium text-sectiontitle text-black dark:text-white"></h4>
+</div>
+<h2 x-text="sectionSubtitle" class="font-bold text-3xl xl:text-sectiontitle3 text-black dark:text-white md:w-4/5 xl:w-1/2 mx-auto mb-4"></h2>
+<p class="mx-auto md:w-4/5 lg:w-3/5 xl:w-[46%]" x-text="sectionTitlePara"></p>
+
+        </div>
+        <!-- Section Title End -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-7.5 xl:gap-12.5 mt-12.5 lg:mt-15 xl:mt-20">
+          <!-- Features item Start -->
+          <div class="animate_top border border-white shadow-solid-3 rounded-lg p-7.5 xl:p-12.5 transitn-all hover:shadow-solid-4 dark:hover:bg-hoverdark dark:border-strokedark dark:bg-blacksection">
+            <div class="flex items-center justify-center rounded-[4px] bg-primary w-16 h-16">
+              <img src="images/icon-01.svg" alt="Icon" />
+            </div>
+            <h3 class="font-semibold text-xl xl:text-itemtitle text-black dark:text-white mt-7.5 mb-5">Sứ mệnh</h3>
+            <p>Cung cấp những giải pháp ứng dụng máy học trong lĩnh vực thương mại điện tử và bán lẻ từ đó nâng cao chất lượng phục vụ khách hàng.</p>
+          </div>
+          <!-- Features item End -->
+
+          <!-- Features item Start -->
+          <div class="animate_top border border-white shadow-solid-3 rounded-lg p-7.5 xl:p-12.5 transition-all hover:shadow-solid-4 dark:hover:bg-hoverdark dark:border-strokedark dark:bg-blacksection">
+            <div class="flex items-center justify-center rounded-[4px] bg-primary w-16 h-16">
+              <img src="images/icon-02.svg" alt="Icon" />
+            </div>
+            <h3 class="font-semibold text-xl xl:text-itemtitle text-black dark:text-white mt-7.5 mb-5">Tầm nhìn</h3>
+            <p>Trở thành một trong những tập đoàn công nghệ hàng đầu tại Việt Nam, đồng thời mang trí tuệ nhân tạo đến gần hơn với cuộc sống của mọi người.</p>
+          </div>
+          <!-- Features item End -->
+
+
+    </section>
+    <!-- ===== Features End ===== -->
+
+    <!-- ===== Funfact Start ===== -->
+    <section class="py-20 lg:py-22.5 px-4 md:px-8 2xl:px-0">
+      <div
+        class="mx-auto max-w-c-1390 py-22.5 xl:py-27.5 relative z-1 rounded-lg bg-gradient-to-t from-[#F8F9FF] to-[#DEE7FF] dark:bg-gradient-to-t dark:from-transparent dark:to-transparent dark:bg-blacksection dark:stroke-strokedark"
+      >
+        <img src="images/shape-04.svg" alt="Man" class="absolute -top-25 -left-15 lg:left-0 -z-1" />
+        <img src="images/shape-05.svg" alt="Doodle" class="absolute bottom-0 right-0 -z-1" />
+        <img src="images/shape-dotted-light-02.svg" alt="Dotted" class="absolute top-0 left-0 -z-1 dark:hidden" />
+        <img src="images/shape-dotted-dark-02.svg" alt="Dotted" class="absolute top-0 left-0 -z-1 hidden dark:block" />
+
+        <div class="animate_top mx-auto text-center md:w-4/5 lg:w-2/3 xl:w-1/2 mb-12.5 lg:mb-17.5 px-4 md:px-0">
+          <h2 class="font-bold text-black dark:text-white text-3xl xl:text-sectiontitle3 mb-4">Chương trình đào tạo</h2>
+          <p class="lg:w-11/12 mx-auto">Với phương châm lấy nhân tài làm gốc, Tensoract triển khai <a href="/ttp">Chương trình đào tạo</a> (TTP - Tensoract Training Program) nhằm mục đích bồi dưỡng các tài năng tin học, lập trình từ sớm thông qua việc tổ chức khoá học, chia sẻ kiến thức và cung cấp tài nguyên nghiên cứu miễn phí.</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-8 lg:gap-42.5">
+          <div class="animate_top text-center">
+            <h3 class="font-bold text-black dark:text-white text-3xl xl:text-sectiontitle3 mb-2.5">19</h3>
+            <p class="text-lg lg:text-para2">Thành viên</p>
+          </div>
+          <div class="animate_top text-center">
+            <h3 class="font-bold text-black dark:text-white text-3xl xl:text-sectiontitle3 mb-2.5">6</h3>
+            <p class="text-lg lg:text-para2">Khoá học</p>
+          </div>
+          <div class="animate_top text-center">
+            <h3 class="font-bold text-black dark:text-white text-3xl xl:text-sectiontitle3 mb-2.5">20+</h3>
+            <p class="text-lg lg:text-para2">Buổi chia sẻ</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Funfact End ===== -->
+
+    <!-- ===== Blog Start ===== -->
+    <!-- <section   class="py-20 lg:py-25 xl:py-30">
+      <div class="mx-auto max-w-c-1315 px-4 md:px-8 xl:px-0">
+        <div
+          class="animate_top text-center mx-auto"
+          x-data="{ sectionTitle: `HOẠT ĐỘNG`, sectionSubtitle: `Hoạt động tại Tensoract`, sectionTitlePara: `Làm ra làm chơi ra chơi là phương châm của Tensoract. Chúng tôi luôn tạo điều kiện để các thành viên có thể thư giãn sau những giờ làm việc căng thẳng.`}"
+        >
+          <div class="bg-zumthor dark:bg-blacksection dark:border dark:border-strokedark inline-block rounded-full py-1.5 px-4.5 mb-4">
+  <h4 x-text="sectionTitle" class="font-medium text-sectiontitle text-black dark:text-white"></h4>
+</div>
+<h2 x-text="sectionSubtitle" class="font-bold text-3xl xl:text-sectiontitle3 text-black dark:text-white md:w-4/5 xl:w-1/2 mx-auto mb-4"></h2>
+<p class="mx-auto md:w-4/5 lg:w-3/5 xl:w-[46%]" x-text="sectionTitlePara"></p>
+
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-c-1280 px-4 md:px-8 xl:px-0 mt-15 xl:mt-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7.5 xl:gap-10">
+          <div class="animate_top bg-white dark:bg-blacksection rounded-lg shadow-solid-8 p-4 ">
+            <a  class="block">
+              <img src="./images/blog/blog-01.png" alt="Blog" />
+            </a>
+
+            <div class="px-4">
+              
+            </div>
+          </div>
+
+          <div class="animate_top bg-white dark:bg-blacksection rounded-lg shadow-solid-8 p-4">
+            <a class="block">
+              <img src="./images/blog/blog-02.png" alt="Blog" />
+            </a>
+
+            <div class="px-4">
+      
+            </div>
+          </div>
+
+          <div class="animate_top bg-white dark:bg-blacksection rounded-lg shadow-solid-8 p-4 ">
+            <a  class="block">
+              <img src="./images/blog/blog-03.png" alt="Blog" />
+            </a>
+
+           
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- ===== Blog End ===== -->
+
+
+    <!-- ===== CTA Start ===== -->
+    <section id="features" class="py-20 lg:py-25 xl:py-30 px-4 md:px-8 2xl:px-0 overflow-hidden">
+      <div
+        class="mx-auto max-w-c-1390 px-7.5 md:px-12.5 xl:px-17.5 py-12.5 xl:py-0 rounded-lg bg-gradient-to-t from-[#F8F9FF] to-[#DEE7FF] dark:bg-gradient-to-t dark:from-transparent dark:to-transparent dark:bg-blacksection dark:stroke-strokedark">
+        <div class="flex flex-wrap md:flex-nowrap md:items-center md:justify-between gap-8 md:gap-0">
+          <div class="animate_left md:w-[70%] lg:w-1/2">
+            <h2 class="text-black dark:text-white text-3xl xl:text-sectiontitle4 font-bold mb-4 w-11/12">
+              Tham gia vào đội ngũ Tensoract ngay hôm nay
+            </h2>
+          </div>
+          <div class="animate_right lg:w-[45%]">
+            <div class="flex items-center justify-end xl:justify-between">
+              <img src="images/shape-06.svg" alt="Saly" class="hidden xl:block" />
+              <a href="signup.html"
+                class="inline-flex items-center gap-2.5 font-medium text-white dark:text-black bg-black dark:bg-white rounded-full py-3 px-6">
+                Tham gia ngay
+                <img src="images/icon-arrow-dark.svg" alt="Arrow" class="dark:hidden" />
+                <img src="images/icon-arrow-light.svg" alt="Arrow" class="hidden dark:block" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== CTA End ===== -->
+
+    <!-- ===== Integrations Start ===== -->
+    <section >
+      <div  class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0">
+        <!-- Section Title Start -->
+        <div
+          class="animate_top text-center mx-auto"
+          x-data="{ sectionTitle: `SẢN PHẨM`, sectionSubtitle: `Đang trong quá trình xây dựng`, sectionTitlePara: `Chúng tôi sẽ phát hành sản phẩm vào tháng 10 này`}"
+        >
+          <div class="bg-zumthor dark:bg-blacksection dark:border dark:border-strokedark inline-block rounded-full py-1.5 px-4.5 mb-4">
+  <h4 x-text="sectionTitle" class="font-medium text-sectiontitle text-black dark:text-white"></h4>
+</div>
+<h2 x-text="sectionSubtitle" class="font-bold text-3xl xl:text-sectiontitle3 text-black dark:text-white md:w-4/5 xl:w-1/2 mx-auto mb-4"></h2>
+<p class="mx-auto md:w-4/5 lg:w-3/5 xl:w-[46%]" x-text="sectionTitlePara"></p>
+
+        </div>
+        <!-- Section Title End -->
+      </div>
+
+      <div  class="mx-auto max-w-c-1154 px-4 md:px-8 xl:px-0 relative z-50 mt-15 xl:mt-20">
+        <div class="absolute -top-3/4 -z-1">
+          <img src="images/shape-dotted-light.svg" alt="Dotted" class="dark:hidden" />
+          <img src="images/shape-dotted-dark.svg" alt="Dotted" class="hidden dark:block" />
+        </div>
+        <div class="flex flex-wrap gap-y-10 justify-around">
+          <div class="animate_top w-1/6">
+            <div class="inline-block rounded-[10px] shadow-solid-7 bg-white dark:bg-btndark p-4.5">
+              <!-- <img src="./images/brand/brand-07.svg" alt="Brand" /> -->
+              <b>   L   </b>
+            </div>
+          </div>
+
+          <div class="animate_top w-1/6"></div>
+
+          <div class="animate_top w-1/6">
+            <div class="inline-block rounded-[10px] shadow-solid-7 bg-white dark:bg-btndark p-4.5">
+              <!-- <img src="./images/brand/brand-08.svg" alt="Brand" /> -->
+              <b>   I   </b>
+            </div>
+          </div>
+
+          <div class="animate_top w-1/6">
+            <div class="bg-[#FFDB26] rounded-full w-[11px] h-[11px]"></div>
+          </div>
+
+          <div class="animate_top w-1/6">
+            <div class="inline-block rounded-[10px] shadow-solid-7 bg-white dark:bg-btndark p-4.5">
+              <!-- <img src="./images/brand/brand-09.svg" alt="Brand" /> -->
+              <b>   Q   </b>
+            </div>
+          </div>
+
+          <div class="animate_top w-1/6"></div>
+
+          <div class="animate_top w-1/6">
+            <div class="bg-[#62E888] rounded-full w-[15px] h-[15px]"></div>
+          </div>
+
+          <div class="animate_top w-1/6">
+            <div class="inline-block rounded-[10px] shadow-solid-7 bg-white dark:bg-btndark p-4.5">
+              <!-- <img src="./images/brand/brand-10.svg" alt="Brand" /> -->
+              <b>   U   </b>
+            </div>
+          </div>
+
+          <div class="animate_top w-1/6">
+            <div class="bg-[#EF5C00] rounded-full w-[23px] h-[23px]"></div>
+          </div>
+
+          <div class="animate_top w-1/6">
+            <div class="inline-block rounded-[10px] shadow-solid-7 bg-white dark:bg-btndark p-4.5">
+              <!-- <img src="./images/brand/brand-11.svg" alt="Brand" /> -->
+              <b>   I   </b>
+            </div>
+          </div>
+
+          <div class="animate_top w-1/6">
+            <div class="bg-[#016BFF] rounded-full w-[15px] h-[15px]"></div>
+          </div>
+
+          <div class="animate_top w-1/6">
+            <div class="inline-block rounded-[10px] shadow-solid-7 bg-white dark:bg-btndark p-4.5">
+              <!-- <img src="./images/brand/brand-12.svg" alt="Brand" /> -->
+              <b>   D   </b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Integrations End ===== -->
+
+    <!-- ===== FAQ Start ===== -->
+    <section class="pb-20 lg:pb-25 xl:pb-30 overflow-hidden">
+      <div class="mx-auto max-w-c-1235 px-4 md:px-8 xl:px-0 relative">
+        <div class="absolute -bottom-7.5 -z-1">
+          <img src="images/shape-dotted-light.svg" alt="Dotted" class="dark:hidden" />
+          <img src="images/shape-dotted-light.svg" alt="Dotted" class="hidden dark:block" />
+        </div>
+        <div class="flex flex-wrap md:flex-nowrap md:items-center gap-8 xl:gap-32.5">
+          <div class="animate_left md:w-2/5 lg:w-1/2">
+            <h4 class="text-black dark:text-white font-medium uppercase">Câu hỏi dành cho chúng tôi</h4>
+            <h2 class="relative font-bold text-black dark:text-white text-3xl xl:text-hero mb-6">
+              Những
+              <span
+                class="inline-block relative before:absolute before:bottom-2.5 before:left-0 before:w-full before:h-3 before:bg-titlebg2 dark:before:bg-titlebgdark before:-z-1">câu
+                hỏi</span>
+              thường gặp
+            </h2>
+          </div>
+
+          <div class="animate_right md:w-3/5 lg:w-1/2">
+            <div class="bg-white dark:bg-blacksection dark:border dark:border-strokedark shadow-solid-8 rounded-lg"
+              x-data="{selected:0}">
+              <div class="flex flex-col border-b border-stroke dark:border-strokedark">
+                <h4 @click="selected !== 0 ? selected = 0 : selected = null"
+                  class="cursor-pointer flex justify-between items-center font-medium text-metatitle3 text-black dark:text-white py-5 lg:py-7.5 px-6 lg:px-9">
+                  Tensoract là gì?
+                  <img src="images/icon-plus-light.svg" alt="plus" class="dark:hidden"
+                    :class="selected == 0 ? 'hidden' : 'block'" />
+                  <img src="images/icon-minus-light.svg" alt="minus" class="dark:hidden"
+                    :class="selected == 0 ? 'block' : 'hidden'" />
+                  <img src="images/icon-plus-dark.svg" alt="plus" class="hidden dark:block"
+                    :class="selected == 0 ? 'dark:hidden' : 'dark:block'" />
+                  <img src="images/icon-minus-dark.svg" alt="minus" class="hidden dark:block"
+                    :class="selected == 0 ? 'dark:block' : 'dark:hidden'" />
+                </h4>
+                <p x-show="selected == 0"
+                  class="py-5 lg:py-7.5 px-6 lg:px-9 border-t border-stroke dark:border-strokedark">
+                  Tensoract là công ty khởi nghiệp về công nghệ và trí tuệ nhân tạo. Chúng tôi cung cấp các sản phẩm công nghệ đến tay người dùng.
+                </p>
+              </div>
+              <div class="flex flex-col border-b border-stroke dark:border-strokedark">
+                <h4 @click="selected !== 1 ? selected = 1 : selected = null"
+                  class="cursor-pointer flex justify-between items-center font-medium text-metatitle3 text-black dark:text-white py-5 lg:py-7.5 px-6 lg:px-9">
+                  Tôi có thể đăng kí dùng thử bằng cách nào ?
+                  <img src="images/icon-plus-light.svg" alt="plus" class="dark:hidden"
+                    :class="selected == 1 ? 'hidden' : 'block'" />
+                  <img src="images/icon-minus-light.svg" alt="minus" class="dark:hidden"
+                    :class="selected == 1 ? 'block' : 'hidden'" />
+                  <img src="images/icon-plus-dark.svg" alt="plus" class="hidden dark:block"
+                    :class="selected == 1 ? 'dark:hidden' : 'dark:block'" />
+                  <img src="images/icon-minus-dark.svg" alt="minus" class="hidden dark:block"
+                    :class="selected == 1 ? 'dark:block' : 'dark:hidden'" />
+                </h4>
+                <p x-show="selected == 1"
+                  class="py-5 lg:py-7.5 px-6 lg:px-9 border-t border-stroke dark:border-strokedark">
+                  Bạn có thể điền vào biểu mẫu đăng kí nhận thông tin tại trang này. Chúng tôi sẽ gửi email cho bạn khi có những cập nhật mới.
+                </p>
+              </div>
+              <div class="flex flex-col">
+                <h4 @click="selected !== 2 ? selected = 2 : selected = null"
+                  :class="{'cursor-pointer flex justify-between items-center font-medium text-metatitle3 text-black dark:text-white py-5 lg:py-7.5 px-6 lg:px-9': true, 'rounded-b': selected != 2}">
+                  Làm sao để tham gia Tensoract ?
+                  <img src="images/icon-plus-light.svg" alt="plus" class="dark:hidden"
+                    :class="selected == 2 ? 'hidden' : 'block'" />
+                  <img src="images/icon-minus-light.svg" alt="minus" class="dark:hidden"
+                    :class="selected == 2 ? 'block' : 'hidden'" />
+                  <img src="images/icon-plus-dark.svg" alt="plus" class="hidden dark:block"
+                    :class="selected == 2 ? 'dark:hidden' : 'dark:block'" />
+                  <img src="images/icon-minus-dark.svg" alt="minus" class="hidden dark:block"
+                    :class="selected == 2 ? 'dark:block' : 'dark:hidden'" />
+                </h4>
+                <p x-show="selected == 2"
+                  :class="{'py-5 lg:py-7.5 px-6 lg:px-9 border-t border-stroke dark:border-strokedark': true, 'rounded-b': selected == 2}">
+                  Tensoract là một start-up đang trong quá trình phát triển, do đó chúng tôi quý trọng mọi đóng góp của bạn. Để tham gia đội ngũ phát triển sản phẩm vui lòng gửi email đến hr@tensoract.io, nếu bạn muốn tham gia Chương trình đào tạo xin vui lòng liên hệ trainingprogram@tensoract.io. Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất.
+                </p>
+              </div>
+              <div class="flex flex-col">
+                <h4 @click="selected !== 3 ? selected = 3 : selected = null"
+                  :class="{'cursor-pointer flex justify-between items-center font-medium text-metatitle3 text-black dark:text-white py-5 lg:py-7.5 px-6 lg:px-9': true, 'rounded-b': selected != 2}">
+                  Tôi muốn đầu tư vào Tensoract ?
+                  <img src="images/icon-plus-light.svg" alt="plus" class="dark:hidden"
+                    :class="selected == 3 ? 'hidden' : 'block'" />
+                  <img src="images/icon-minus-light.svg" alt="minus" class="dark:hidden"
+                    :class="selected == 3 ? 'block' : 'hidden'" />
+                  <img src="images/icon-plus-dark.svg" alt="plus" class="hidden dark:block"
+                    :class="selected == 3 ? 'dark:hidden' : 'dark:block'" />
+                  <img src="images/icon-minus-dark.svg" alt="minus" class="hidden dark:block"
+                    :class="selected == 3 ? 'dark:block' : 'dark:hidden'" />
+                </h4>
+                <p x-show="selected == 3"
+                  :class="{'py-5 lg:py-7.5 px-6 lg:px-9 border-t border-stroke dark:border-strokedark': true, 'rounded-b': selected == 2}">
+                  Chúng tôi đang tìm kiếm các nhà đầu tư có cùng tầm nhìn với chúng tôi. Nếu bạn quan tâm đến việc đầu tư vào Tensoract, vui lòng gửi email đến investments@tensoract.io
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== FAQ End ===== -->
+
+
+    <!-- ===== Contact Start ===== -->
+    <section id="contact" class="px-4 md:px-8 2xl:px-0 mb-20">
+      <div class="mx-auto max-w-c-1390 relative pt-10 lg:pt-15 xl:pt-20 px-7.5 lg:px-15 xl:px-20 overflow-hidden">
+        <div
+          class="absolute -z-1 rounded-lg left-0 top-0 w-full h-2/3 bg-gradient-to-t from-[#F8F9FF] to-[#DEE7FF] dark:bg-gradient-to-t dark:from-[#24283E] dark:to-[#252A42]">
+        </div>
+        <div class="absolute -z-1 bottom-5 left-0 w-full h-1/3">
+          <img src="images/shape-dotted-light.svg" alt="Dotted" class="dark:hidden" />
+          <img src="images/shape-dotted-dark.svg" alt="Dotted" class="hidden dark:block" />
+        </div>
+
+        <div class="flex flex-wrap md:flex-nowrap flex-col-reverse md:flex-row gap-8 xl:gap-20 md:justify-between">
+          <div
+            class="animate_top w-full md:w-3/5 lg:w-3/4 shadow-solid-8 rounded-lg bg-white dark:bg-black dark:border dark:border-strokedark p-7.5 xl:p-15">
+            <h2 class="text-black dark:text-white text-3xl xl:text-sectiontitle2 font-semibold mb-15">Để lại lời nhắn
+              cho chúng tôi</h2>
+
+            <form action="https://app.formbold.com/s/9gZ4R" method="POST">
+              <div class="flex flex-col lg:flex-row lg:justify-between gap-7.5 lg:gap-14 mb-7.5">
+                <input type="text" placeholder="Họ và tên" name="text_input_EB633EE5-5DEE-4DBD-A857-3D7B4EC36B09"
+                  class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
+
+                <input type="email" placeholder="Địa chỉ mail" name="text_input_4370F0BC-C21D-4F5B-A700-2BA0544F3AC4"
+                  class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
+              </div>
+
+              <div class="flex flex-col lg:flex-row lg:justify-between gap-7.5 lg:gap-14 mb-12.5">
+                <input type="text" placeholder="Chủ đề" name="text_input_7386021E-2652-42E1-841F-27D70CB6C51C"
+                  class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
+
+                <input type="text" placeholder="Số điện thoại" name="text_input_B77DFAD1-FF15-4918-8D24-F914977AA3BE"
+                  class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
+              </div>
+
+              <div class="flex mb-11.5">
+                <textarea placeholder="Nội dung" name="text_area_C102AF45-2F6F-4608-929F-5A6D3F545E3F" rows="4"
+                  class="w-full bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white"></textarea>
+              </div>
+
+              <div class="flex flex-wrap xl:justify-between gap-10 xl:gap-15">
+                <div>
+                  <label for="supportCheckbox" class="max-w-[425px] flex cursor-pointer select-none hover:text-primary">
+                    <div class="relative">
+                      <input type="checkbox" id="supportCheckbox" class="sr-only" />
+                      <div
+                        class="box mr-4 mt-1 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-strokedark">
+                        <span class="opacity-0">
+                          <svg width="11" height="8" viewBox="0 0 11 8" fill="none" class="stroke-current">
+                            <path
+                              d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
+                              stroke-width="0.4"></path>
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    Bằng việc xác nhận tại đây, bạn đã đồng ý những điều khoản và chính sách bên thứ 3 để gửi lời nhắn.
+                    <nav></nav>
+                  </label>
+                </div>
+
+                <button
+                  class="inline-flex items-center gap-2.5 bg-black hover:bg-blackho ease-in-out duration-300 dark:bg-btndark font-medium text-white rounded-full px-6 py-3">
+                  Gửi
+                  <svg class="fill-white" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10.4767 6.16664L6.00668 1.69664L7.18501 0.518311L13.6667 6.99998L7.18501 13.4816L6.00668 12.3033L10.4767 7.83331H0.333344V6.16664H10.4767Z"
+                      fill="" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="animate_top w-full md:w-2/5 lg:w-[26%] md:p-7.5 xl:pt-15 ">
+            <h2 class="text-black dark:text-white text-3xl xl:text-sectiontitle2 font-semibold mb-12.5">TENSORACT.IO
+            </h2>
+
+            <div class="mb-7 5">
+              <h4 class="font-medium text-black dark:text-white text-metatitle3 mb-4">Địa chỉ</h4>
+              <p>Thủ Đức, TP.Hồ Chí Minh, Việt Nam</p>
+            </div>
+            <div class="mb-7 5">
+              <h4 class="font-medium text-black dark:text-white text-metatitle3 mb-4">Địa chỉ mail</h4>
+              <p><a href="mailto:contact@tensoract.io">contact@tensoract.io</a></p>
+            </div>
+            <!-- <div>
+                <h4 class="font-medium text-black dark:text-white text-metatitle3 mb-4">Số điện thoại</h4>
+                <p><a href="#">+009 42334 6343 843</a></p>
+              </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Contact End ===== -->
+
+
+  </main>
+  <!-- ===== Footer Start ===== -->
+  <footer id="about" class="bg-white dark:bg-blacksection border-t border-stroke dark:border-strokedark">
+    <div class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0">
+      <!-- Footer Top -->
+      <div class="py-20 lg:py-25">
+        <div class="flex flex-wrap lg:justify-between gap-8 lg:gap-0">
+          <div class="animate_top w-1/2 lg:w-1/4">
+            <a href="index.html">
+              <img src="images/logo-light.svg" alt="Logo" class="dark:hidden" />
+              <img src="images/logo-dark.svg" alt="Logo" class="hidden dark:block" />
+            </a>
+  
+            <p class="mt-5 mb-10">
+              Cung cấp giải pháp Trí tuệ nhân tạo trong thương mại điện tử.</p>
+
+            <p class="uppercase tracking-[5px] text-sectiontitle mb-1.5">liên hệ</p>
+            <a href="#" class="text-black dark:text-white font-medium text-itemtitle">contact@tensoract.io</a>
+          </div>
+  
+          <div class="w-full lg:w-2/3 xl:w-7/12 flex flex-col md:flex-row md:justify-between gap-8 md:gap-0">
+            <div class="animate_top">
+              <h4 class="font-medium text-black dark:text-white text-itemtitle2 mb-9">Liên kết</h4>
+  
+              <ul>
+                <li><a href="#" class="inline-block hover:text-primary mb-3">Trang chủ</a></li>
+                <li><a href="#product" class="inline-block hover:text-primary mb-3">Sản phẩm</a></li>
+    
+              </ul>
+            </div>
+  
+            <div class="animate_top">
+              <h4 class="font-medium text-black dark:text-white text-itemtitle2 mb-9">Hỗ trợ</h4>
+  
+              <ul>
+                <li><a href="#" class="inline-block hover:text-primary mb-3">Tuyển dụng</a></li>
+                <li><a href="#" class="inline-block hover:text-primary mb-3">Doanh nghiệp</a></li>
+          
+                <li><a href="#" class="inline-block hover:text-primary mb-3">Liên hệ chúng tôi</a></li>
+              </ul>
+            </div>
+  
+            <div class="animate_top">
+              <h4 class="font-medium text-black dark:text-white text-itemtitle2 mb-9">Nhận thông tin</h4>
+              <p class="mb-4 w-[90%]">Theo dõi chúng tôi để nhận thông tin mới nhất</p>
+  
+              <form action="https://app.formbold.com/s/oaE4v" method="POST">
+                <div class="relative">
+                  <input
+                    type="email"
+                    placeholder="Địa chỉ mail"
+                    name="text_input_4768F148-66E7-4BCF-A8CA-1C6C74E7E4E5"
+                    value=""
+                    required=""
+                    class="w-full dark:bg-black border border-stroke dark:border-strokedark shadow-solid-11 dark:shadow-none rounded-full focus:outline-none focus:border-primary dark:focus:border-primary py-3 px-6"
+                  />
+  
+                  <button class="absolute right-0 p-4">
+                    <svg class="fill-[#757693] dark:fill-white hover:fill-primary" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_48_1487)">
+                        <path
+                          d="M3.1175 1.17318L18.5025 9.63484C18.5678 9.67081 18.6223 9.72365 18.6602 9.78786C18.6982 9.85206 18.7182 9.92527 18.7182 9.99984C18.7182 10.0744 18.6982 10.1476 18.6602 10.2118C18.6223 10.276 18.5678 10.3289 18.5025 10.3648L3.1175 18.8265C3.05406 18.8614 2.98262 18.8792 2.91023 18.8781C2.83783 18.8769 2.76698 18.857 2.70465 18.8201C2.64232 18.7833 2.59066 18.7308 2.55478 18.6679C2.51889 18.6051 2.50001 18.5339 2.5 18.4615V1.53818C2.50001 1.46577 2.51889 1.39462 2.55478 1.33174C2.59066 1.26885 2.64232 1.2164 2.70465 1.17956C2.76698 1.14272 2.83783 1.12275 2.91023 1.12163C2.98262 1.12051 3.05406 1.13828 3.1175 1.17318ZM4.16667 10.8332V16.3473L15.7083 9.99984L4.16667 3.65234V9.16651H8.33333V10.8332H4.16667Z"
+                          fill=""
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_48_1487">
+                          <rect width="20" height="20" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer Top -->
+  
+      <!-- Footer Bottom -->
+      <div class="border-t border-stroke dark:border-strokedark flex flex-wrap flex-col lg:flex-row items-center justify-center lg:justify-between gap-5 lg:gap-0 py-7">
+        <div class="animate_top">
+          <ul class="flex items-center gap-8">
+            <li><a href="/index-en.html" class="hover:text-primary">English</a></li>
+            <li><a href="#" class="hover:text-primary">Điều khoản</a></li>
+            <li><a href="#" class="hover:text-primary">Liên hệ</a></li>
+          </ul>
+        </div>
+  
+        <div class="animate_top">
+          <p>&copy; 2023 Tensoract</p>
+        </div>
+  
+        <div class="animate_top">
+          <ul class="flex items-center gap-5">
+            <li>
+              <a href="https://www.facebook.com/tensoract">
+                <svg class="fill-[#D1D8E0] hover:fill-primary transition-all duration-300" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_48_1499)">
+                    <path d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47 14 5.5 16 5.5H17.5V2.14C17.174 2.097 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z" fill="" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_48_1499">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            </li>
+            <!-- <li>
+              <a href="#">
+                <svg class="fill-[#D1D8E0] hover:fill-primary transition-all duration-300" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_48_1502)">
+                    <path
+                      d="M22.162 5.65593C21.3985 5.99362 20.589 6.2154 19.76 6.31393C20.6337 5.79136 21.2877 4.96894 21.6 3.99993C20.78 4.48793 19.881 4.82993 18.944 5.01493C18.3146 4.34151 17.4803 3.89489 16.5709 3.74451C15.6615 3.59413 14.7279 3.74842 13.9153 4.18338C13.1026 4.61834 12.4564 5.30961 12.0771 6.14972C11.6978 6.98983 11.6067 7.93171 11.818 8.82893C10.1551 8.74558 8.52832 8.31345 7.04328 7.56059C5.55823 6.80773 4.24812 5.75098 3.19799 4.45893C2.82628 5.09738 2.63095 5.82315 2.63199 6.56193C2.63199 8.01193 3.36999 9.29293 4.49199 10.0429C3.828 10.022 3.17862 9.84271 2.59799 9.51993V9.57193C2.59819 10.5376 2.93236 11.4735 3.54384 12.221C4.15532 12.9684 5.00647 13.4814 5.95299 13.6729C5.33661 13.84 4.6903 13.8646 4.06299 13.7449C4.32986 14.5762 4.85 15.3031 5.55058 15.824C6.25117 16.345 7.09712 16.6337 7.96999 16.6499C7.10247 17.3313 6.10917 17.8349 5.04687 18.1321C3.98458 18.4293 2.87412 18.5142 1.77899 18.3819C3.69069 19.6114 5.91609 20.2641 8.18899 20.2619C15.882 20.2619 20.089 13.8889 20.089 8.36193C20.089 8.18193 20.084 7.99993 20.076 7.82193C20.8949 7.2301 21.6016 6.49695 22.163 5.65693L22.162 5.65593Z"
+                      fill=""
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_48_1502">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            </li> -->
+            <li>
+              <a href="https://www.linkedin.com/company/tensoractio" target="_blank">
+                <svg class="fill-[#D1D8E0] hover:fill-primary transition-all duration-300" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_48_1505)">
+                    <path
+                      d="M6.94 5.00002C6.93974 5.53046 6.72877 6.03906 6.35351 6.41394C5.97825 6.78883 5.46944 6.99929 4.939 6.99902C4.40857 6.99876 3.89997 6.78779 3.52508 6.41253C3.1502 6.03727 2.93974 5.52846 2.94 4.99802C2.94027 4.46759 3.15124 3.95899 3.5265 3.5841C3.90176 3.20922 4.41057 2.99876 4.941 2.99902C5.47144 2.99929 5.98004 3.21026 6.35492 3.58552C6.72981 3.96078 6.94027 4.46959 6.94 5.00002ZM7 8.48002H3V21H7V8.48002ZM13.32 8.48002H9.34V21H13.28V14.43C13.28 10.77 18.05 10.43 18.05 14.43V21H22V13.07C22 6.90002 14.94 7.13002 13.28 10.16L13.32 8.48002Z"
+                      fill=""
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_48_1505">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            </li>
+            <!-- <li>
+              <a href="https://www.linkedin.com/company/tensoractio" target="_blank">
+                <svg class="fill-[#D1D8E0] hover:fill-primary transition-all duration-300" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_48_1508)">
+                    <path
+                      d="M7.443 5.3501C8.082 5.3501 8.673 5.4001 9.213 5.5481C9.70301 5.63814 10.1708 5.82293 10.59 6.0921C10.984 6.3391 11.279 6.6861 11.475 7.1311C11.672 7.5761 11.77 8.1211 11.77 8.7141C11.77 9.4071 11.623 10.0001 11.279 10.4451C10.984 10.8911 10.492 11.2861 9.902 11.5831C10.738 11.8311 11.377 12.2761 11.77 12.8691C12.164 13.4631 12.41 14.2051 12.41 15.0461C12.41 15.7391 12.262 16.3321 12.016 16.8271C11.77 17.3221 11.377 17.7671 10.934 18.0641C10.4528 18.3825 9.92084 18.6165 9.361 18.7561C8.771 18.9051 8.181 19.0041 7.591 19.0041H1V5.3501H7.443ZM7.049 10.8901C7.59 10.8901 8.033 10.7421 8.377 10.4951C8.721 10.2481 8.869 9.8021 8.869 9.2581C8.869 8.9611 8.819 8.6641 8.721 8.4671C8.623 8.2691 8.475 8.1201 8.279 7.9721C8.082 7.8731 7.885 7.7741 7.639 7.7251C7.393 7.6751 7.148 7.6751 6.852 7.6751H4V10.8911H7.05L7.049 10.8901ZM7.197 16.7281C7.492 16.7281 7.787 16.6781 8.033 16.6291C8.28138 16.5819 8.51628 16.4805 8.721 16.3321C8.92139 16.1873 9.08903 16.002 9.213 15.7881C9.311 15.5411 9.41 15.2441 9.41 14.8981C9.41 14.2051 9.213 13.7101 8.82 13.3641C8.426 13.0671 7.885 12.9191 7.246 12.9191H4V16.7291H7.197V16.7281ZM16.689 16.6781C17.082 17.0741 17.672 17.2721 18.459 17.2721C19 17.2721 19.492 17.1241 19.885 16.8771C20.279 16.5801 20.525 16.2831 20.623 15.9861H23.033C22.639 17.1731 22.049 18.0141 21.263 18.5581C20.475 19.0531 19.541 19.3501 18.41 19.3501C17.6864 19.3523 16.9688 19.2179 16.295 18.9541C15.6887 18.7266 15.148 18.3529 14.721 17.8661C14.2643 17.4107 13.9267 16.8498 13.738 16.2331C13.492 15.5901 13.393 14.8981 13.393 14.1061C13.393 13.3641 13.492 12.6721 13.738 12.0281C13.9745 11.4082 14.3245 10.8378 14.77 10.3461C15.213 9.9011 15.754 9.5061 16.344 9.2581C17.0007 8.99416 17.7022 8.85969 18.41 8.8621C19.246 8.8621 19.984 9.0111 20.623 9.3571C21.263 9.7031 21.754 10.0991 22.148 10.6931C22.5499 11.2636 22.8494 11.8998 23.033 12.5731C23.131 13.2651 23.18 13.9581 23.131 14.7491H16C16 15.5411 16.295 16.2831 16.689 16.6791V16.6781ZM19.787 11.4841C19.443 11.1381 18.902 10.9401 18.262 10.9401C17.82 10.9401 17.475 11.0391 17.18 11.1871C16.885 11.3361 16.689 11.5341 16.492 11.7321C16.311 11.9234 16.1912 12.1643 16.148 12.4241C16.098 12.6721 16.049 12.8691 16.049 13.0671H20.475C20.377 12.3251 20.131 11.8311 19.787 11.4841V11.4841ZM15.459 6.2901H20.967V7.6261H15.46V6.2901H15.459Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_48_1508">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+      <!-- Footer Bottom -->
+    </div>
+  </footer>
+  
+  <!-- ===== Footer End ===== -->
+
+  <!-- ====== Back To Top Start ===== -->
+  <button
+  class="hidden items-center justify-center w-10 h-10 rounded-[4px] shadow-solid-5 bg-primary hover:bg-primaryho fixed bottom-8 right-8 z-999"
+  @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+  @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false"
+  :class="{ '!flex' : scrollTop }"
+>
+  <svg class="fill-white w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+  </svg>
+</button>
+
+  <!-- ====== Back To Top End ===== -->
+<script defer src="bundle.js"></script></body>
+
 </html>
