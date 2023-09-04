@@ -59,9 +59,9 @@
     >
       <nav>
         <ul class="flex lg:items-center flex-col lg:flex-row gap-5 lg:gap-10">
-          <li><a href="index.html" class="hover:text-primary" :class="{ 'text-primary': page === 'home' }">Trang chủ</a></li>
+          <li><a href="index.html" class="hover:text-primary" class="hover:text-primary">Trang chủ</a></li>
           <li><a href="index.html#features" class="hover:text-primary">Dự án</a></li>
-
+          <li><a href="ttp.html" class="hover:text-primary">Chương trình đào tạo</a></li>
           <li><a href="index.html#contact" class="hover:text-primary">Liên hệ</a></li>
           <li><a href="index.html#about" class="hover:text-primary">Về chúng tôi</a></li>
         </ul>
@@ -172,24 +172,24 @@
     <!-- ===== Clients Start ===== -->
     <section class="bg-alabaster dark:bg-black border border-x-0 border-y-stroke dark:border-y-strokedark  ">
       <div class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0 center">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-7.5 lg:gap-12.5 xl:gap-29 justify-center items-center h-40">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-7.5 lg:gap-12.5 xl:gap-29 justify-center items-center h-40">
           <a class="hidden md:block animate_top ">
 
           </a>
 
    
-          <a href="#" class="animate_top block">
+          <a href="" class="animate_top block">
             <img class="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden"
               src="images/brand14.svg" alt="Clients" />
             <img class="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block"
               src="images/brand14.svg" alt="Clients" />
           </a>
-          <a href="#" class="animate_top block">
+          <!-- <a href="#" class="animate_top block">
             <img class="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden"
-              src="images/brand15.svg" alt="Clients" />
+              src="./images/brand/brand15.svg" alt="Clients" />
             <img class="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block"
-              src="images/brand15.svg" alt="Clients" />
-          </a>
+              src="./images/brand/brand15.svg" alt="Clients" />
+          </a> -->
         </div>
       </div>
     </section>
@@ -557,28 +557,28 @@
 
             <form action="https://app.formbold.com/s/9gZ4R" method="POST">
               <div class="flex flex-col lg:flex-row lg:justify-between gap-7.5 lg:gap-14 mb-7.5">
-                <input type="text" placeholder="Họ và tên" name="text_input_EB633EE5-5DEE-4DBD-A857-3D7B4EC36B09"
+                <input required type="text" placeholder="Họ và tên" name="text_input_EB633EE5-5DEE-4DBD-A857-3D7B4EC36B09"
                   class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
 
-                <input type="email" placeholder="Địa chỉ mail" name="text_input_4370F0BC-C21D-4F5B-A700-2BA0544F3AC4"
+                <input required type="email" placeholder="Địa chỉ mail" name="text_input_4370F0BC-C21D-4F5B-A700-2BA0544F3AC4"
                   class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
               </div>
 
               <div class="flex flex-col lg:flex-row lg:justify-between gap-7.5 lg:gap-14 mb-12.5">
-                <input type="text" placeholder="Chủ đề" name="text_input_7386021E-2652-42E1-841F-27D70CB6C51C"
+                <input required type="text" placeholder="Chủ đề" name="text_input_7386021E-2652-42E1-841F-27D70CB6C51C"
                   class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
 
-                <input type="text" placeholder="Số điện thoại" name="text_input_B77DFAD1-FF15-4918-8D24-F914977AA3BE"
+                <input required type="text" placeholder="Số điện thoại" name="text_input_B77DFAD1-FF15-4918-8D24-F914977AA3BE"
                   class="w-full lg:w-1/2 bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white pb-3.5" />
               </div>
 
               <div class="flex mb-11.5">
-                <textarea placeholder="Nội dung" name="text_area_C102AF45-2F6F-4608-929F-5A6D3F545E3F" rows="4"
+                <textarea required placeholder="Nội dung" name="text_area_C102AF45-2F6F-4608-929F-5A6D3F545E3F" rows="4"
                   class="w-full bg-transparent border-b border-stroke dark:border-strokedark focus-visible:outline-none focus:border-waterloo dark:focus:border-manatee focus:placeholder:text-black dark:focus:placeholder:text-white"></textarea>
               </div>
 
               <div class="flex flex-wrap xl:justify-between gap-10 xl:gap-15">
-                <div>
+                <!-- <div>
                   <label for="supportCheckbox" class="max-w-[425px] flex cursor-pointer select-none hover:text-primary">
                     <div class="relative">
                       <input type="checkbox" id="supportCheckbox" class="sr-only" />
@@ -596,7 +596,7 @@
                     Bằng việc xác nhận tại đây, bạn đã đồng ý những điều khoản và chính sách bên thứ 3 để gửi lời nhắn.
                     <nav></nav>
                   </label>
-                </div>
+                </div> -->
 
                 <button
                   class="inline-flex items-center gap-2.5 bg-black hover:bg-blackho ease-in-out duration-300 dark:bg-btndark font-medium text-white rounded-full px-6 py-3">
@@ -634,7 +634,7 @@
     </section>
     <!-- ===== Contact End ===== -->
 
-
+    
   </main>
   <!-- ===== Footer Start ===== -->
   <footer id="about" class="bg-white dark:bg-blacksection border-t border-stroke dark:border-strokedark">
