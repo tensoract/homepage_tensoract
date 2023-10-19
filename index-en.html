@@ -98,36 +98,36 @@
     var sContents = ''; // initialise contents variable
     var iRow; // initialise current row
 
-    function typewriter() {
-      sContents = ' ';
-      iRow = Math.max(0, iIndex - iScrollAt);
-      var destination = document.getElementById("typedtext");
+    // function typewriter() {
+    //   sContents = ' ';
+    //   iRow = Math.max(0, iIndex - iScrollAt);
+    //   var destination = document.getElementById("typedtext");
 
-      while (iRow < iIndex) {
-        sContents += aText[iRow++] + '<br />';
-      }
-      destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
-      if (iTextPos++ == iArrLength) {
-        iTextPos = 0;
-        iIndex++;
-        if (iIndex != aText.length) {
-          iArrLength = aText[iIndex].length;
-          setTimeout("typewriter()", 500);
-        }
-      } else {
-        setTimeout("typewriter()", iSpeed);
-      }
-    }
+    //   while (iRow < iIndex) {
+    //     sContents += aText[iRow++] + '<br />';
+    //   }
+    //   destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
+    //   if (iTextPos++ == iArrLength) {
+    //     iTextPos = 0;
+    //     iIndex++;
+    //     if (iIndex != aText.length) {
+    //       iArrLength = aText[iIndex].length;
+    //       setTimeout("typewriter()", 500);
+    //     }
+    //   } else {
+    //     setTimeout("typewriter()", iSpeed);
+    //   }
+    // }
 
 
-    typewriter();
+    // typewriter();
   </script>
   <main>
     <!-- ===== Hero Start ===== -->
     <section class="pt-35 md:pt-40 xl:pt-46 pb-20 xl:pb-25 overflow-hidden">
       <div class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0">
         <div class="flex lg:items-center lg:gap-8 xl:gap-32.5">
-          <div class="animate_left md:w-1/2 ">
+          <div class="animate_left md:w-1/2 z-1">
             <h4 class="text-black dark:text-white text-lg font-medium mb-4.5  ">🔥 Our product will be released in October this year.</h4>
             <h1 class="text-black dark:text-white text-3xl xl:text-hero font-bold mb-5  ">
               Tensoract is a
@@ -151,9 +151,9 @@
               <!--   <p class="text-black dark:text-white mt-5">Try for free no credit card required.</p> -->
             </div>
           </div>
-          <div class="animate_right md:w-1/2 hidden lg:block ">
+          <div class="animate_right md:w-1/2 hidden md:block ">
             <div class="relative 2xl:-mr-7.5">
-              <img src="images/shape-01.png" alt="shape" class="absolute -left-11.5 top-0" />
+              <img src="images/shape-01.png" alt="shape" class="absolute -left-11.5 top-0 z-0 hidden lg:block" />
               <img src="images/shape-02.svg" alt="shape" class="absolute right-0 bottom-0" />
               <img src="images/shape-03.svg" alt="shape" class="absolute -right-6.5 bottom-0" />
               <div>
@@ -170,16 +170,19 @@
     <!-- ===== Clients Start ===== -->
     <section class="bg-alabaster dark:bg-black border border-x-0 border-y-stroke dark:border-y-strokedark  ">
       <div class="mx-auto max-w-c-1390 px-4 md:px-8 2xl:px-0 center">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-7.5 lg:gap-12.5 xl:gap-29 justify-center items-center h-40">
-          <a class="hidden md:block animate_top ">
-
+        <div class="grid grid-cols-1 xs:grid-cols-2 gap-7.5 lg:gap-12.5 xl:gap-29 justify-center items-center">
+          <a href="" class=" animate_top">
+            <img class="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden lg:w-9/12"
+              src="images/brand16.svg" alt="Clients" />
+            <img class="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block lg:w-9/12"
+              src="images/brand16-dark.svg" alt="Clients" />
           </a>
 
    
           <a href="" class="animate_top block">
-            <img class="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden"
+            <img class="opacity-65 transition-all duration-300 hover:opacity-100 dark:hidden lg:w-9/12"
               src="images/brand14.svg" alt="Clients" />
-            <img class="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block"
+            <img class="hidden opacity-50 transition-all duration-300 hover:opacity-100 dark:block lg:w-9/12"
               src="images/brand14.svg" alt="Clients" />
           </a>
           <!-- <a href="#" class="animate_top block">
@@ -756,7 +759,7 @@
               </svg>
             </a>
           </li> -->
-          <li>
+          <li class="lg:pr-15 2xl:pr-0">
             <a href="https://www.linkedin.com/company/tensoractio" target="_blank">
               <svg class="fill-[#D1D8E0] hover:fill-primary transition-all duration-300" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_48_1505)">

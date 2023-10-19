@@ -541,6 +541,9 @@ body{
 .z-1{
   z-index: 1;
 }
+.z-0{
+  z-index: 0;
+}
 .-z-1{
   z-index: -1;
 }
@@ -703,9 +706,6 @@ body{
 .h-7{
   height: 1.75rem;
 }
-.h-40{
-  height: 10rem;
-}
 .h-16{
   height: 4rem;
 }
@@ -726,6 +726,9 @@ body{
 }
 .h-5{
   height: 1.25rem;
+}
+.h-40{
+  height: 10rem;
 }
 .h-5\.5{
   height: 1.375rem;
@@ -1661,6 +1664,11 @@ body{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+@media (min-width: 475px){
+  .xs\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 @media (min-width: 768px){
   .md\:block{
     display: block;
@@ -1688,9 +1696,6 @@ body{
   }
   .md\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .md\:grid-cols-3{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .md\:grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1796,6 +1801,9 @@ body{
   .lg\:w-2\/3{
     width: 66.666667%;
   }
+  .lg\:w-9\/12{
+    width: 75%;
+  }
   .lg\:w-11\/12{
     width: 91.666667%;
   }
@@ -1898,6 +1906,9 @@ body{
   }
   .lg\:pt-15{
     padding-top: 3.75rem;
+  }
+  .lg\:pr-15{
+    padding-right: 3.75rem;
   }
   .lg\:text-para2{
     font-size: 22px;
@@ -2062,6 +2073,9 @@ body{
   }
   .\32xl\:px-0{
     padding-left: 0px;
+    padding-right: 0px;
+  }
+  .\32xl\:pr-0{
     padding-right: 0px;
   }
   .\32xl\:text-sectiontitle2{
